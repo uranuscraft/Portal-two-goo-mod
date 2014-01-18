@@ -11,6 +11,7 @@ import cpw.mods.fml.client.registry.KeyBindingRegistry;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.Mod.Instance;
+import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.TickType;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
@@ -21,16 +22,21 @@ import cpw.mods.fml.relauncher.Side;
 import portaltwogunmod.crafting.*;
 import portaltwogunmod.keybind.KeyBind;
 import portaltwogunmod.keybind.PlayerTickHandler;
+import portaltwogunmod.plugins.PluginController;
 @Mod(modid=BaseClass.modid, name="PortalTwoGunMod", version="1.0.1")
 @NetworkMod(clientSideRequired = true, serverSideRequired = false)
 public class BaseClass {
 	@Instance(value = "uranuscraft_portaltwogunmod")
     public static BaseClass instance;
-   public static final String modid = "uranuscraft_portaltwogunmod";
-
-
+   public static final String modid = "uranuscraft_portaltwogunmod"; //Adds modid used for textures
    
-   
+   // Says where the client and server 'proxy' code is loaded.
+   @SidedProxy(clientSide="portaltwogunmod.client.ClientProxy", serverSide="portaltwogunmod.core.CommonProxy")
+   public static CommonProxy proxy;
+
+   //Declare ints
+   public static int blueportaltopID;
+   public static int orangeportaltopID;
    public static int lunardustID;
    public static int lunarrockID;
    public static int longfallID;
@@ -43,10 +49,17 @@ public class BaseClass {
    public static int blueportalID;
    public static int orangeportalID;
    
+   
+   
+   public BaseClass() {
+	   PluginController.getController().registerBuiltins();
+   }
+   
+   
    @EventHandler
    public void preInit(FMLPreInitializationEvent event) {
 	   Configuration config = new Configuration(event.getSuggestedConfigurationFile());
-
+       //Add Block/item id configuration
 	   lunardustID = config.get(Configuration.CATEGORY_ITEM, "lunardustID", 1380).getInt();
 	   lunarrockID = config.get(Configuration.CATEGORY_ITEM, "lunarrockID", 1381).getInt();
 	   longfallID = config.get(Configuration.CATEGORY_ITEM, "longfallID", 1382).getInt();
@@ -61,16 +74,23 @@ public class BaseClass {
 	   blueportalID = config.get(Configuration.CATEGORY_BLOCK, "blueportalID", 1388).getInt();
 	   orangeportalID = config.get(Configuration.CATEGORY_BLOCK, "orangeportalID", 1389).getInt();
 	   
+	   blueportaltopID = config.get(Configuration.CATEGORY_BLOCK, "blueportaltopID", 1390).getInt();
+	   orangeportaltopID = config.get(Configuration.CATEGORY_BLOCK, "orangeportaltopID", 1391).getInt();
 	   
 	   
-	   
+	   config.save();
 	   config.load();
-   
+	   PluginController.getController().preInit();
    }
 
    @EventHandler
    public void load(FMLInitializationEvent event) {
-	   CraftingManger.recipeAdder(lunarrockID, lunardustID, longfallID, longfallEnumID, orangeGooID,blueGooID, whiteGooID, gooBallID, PortalGunID, blueportalID, orangeportalID);
+	   
+	   //Adds recipes
+	   CraftingManger.recipeAdder(lunarrockID, lunardustID, longfallID, longfallEnumID, orangeGooID,blueGooID, whiteGooID, gooBallID, PortalGunID, blueportalID, orangeportalID,blueportaltopID, orangeportaltopID);
+	   
+	   
+	   //Adds Keybinds
 	   KeyBinding[] key = {new KeyBinding("r", Keyboard.KEY_R)};
        boolean[] repeat = {false};
        KeyBindingRegistry.registerKeyBinding(new KeyBind(key, repeat));
@@ -80,11 +100,12 @@ public class BaseClass {
        boolean[] leftrepeat = {false};
        KeyBindingRegistry.registerKeyBinding(new KeyBind(left, leftrepeat));
        TickRegistry.registerTickHandler(new PlayerTickHandler(EnumSet.of(TickType.PLAYER)), Side.SERVER);
+       PluginController.getController().init();
    }
    @EventHandler
    public void load(FMLPostInitializationEvent event) {
 
-	 
+	   PluginController.getController().postInit();
    }
 
 }

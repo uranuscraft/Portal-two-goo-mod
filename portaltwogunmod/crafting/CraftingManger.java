@@ -4,9 +4,13 @@ import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 import portaltwogunmod.block.BlueGoo;
 import portaltwogunmod.block.BluePortalBlock;
+import portaltwogunmod.block.BluePortalTopBottom;
 import portaltwogunmod.block.LunarRock;
 import portaltwogunmod.block.OrangeGoo;
 import portaltwogunmod.block.OrangePortalBlock;
+import portaltwogunmod.block.OrangeTop;
+import portaltwogunmod.block.OrangeTopBottom;
+import portaltwogunmod.block.PortalTop;
 import portaltwogunmod.block.WhiteGoo;
 import portaltwogunmod.generation.LunarRockGen;
 import portaltwogunmod.item.GooBall;
@@ -22,30 +26,43 @@ import net.minecraftforge.common.EnumHelper;
 import net.minecraftforge.common.MinecraftForge;
 
 public class CraftingManger {
+//Declare Longfall boots
+	public static int longfallID;
+	public static int longfallEnumID;
+	static EnumArmorMaterial longARMOR = EnumHelper.addArmorMaterial("fall", 20, new int[] { 2, 6, 5, -1 }, 50);
+	public static Item longfall = new LongFallBoots(longfallID, longARMOR, 3, longfallEnumID).setTextureName("boots");
 
-
-	
-	public static Block Orangegoo;
-	public static Block bluegoo;
+//Declares Blocks
+public static Block Orangegoo;
+public static Block bluegoo;
 public static Block lunarrock;
-public static Item lunardust;
-public static int longfallID;
-public static int longfallEnumID;
 public static Block whitegoo;
-public static Item gooball;
-public static Item portalgun;
 public static Block blueportal;
 public static Block orangeportal;
+public static Block blueportaltop;
+public static Block orangeportaltop;
 
-
-static EnumArmorMaterial longARMOR = EnumHelper.addArmorMaterial("fall", 20, new int[] { 2, 6, 5, -1 }, 50);
-public static Item longfall = new LongFallBoots(longfallID, longARMOR, 3, longfallEnumID).setTextureName("boots");
+//Declares Items
+public static Item lunardust;
+public static Item gooball;
+public static Item portalgun;
 	
-
-
-
-
-public static void recipeAdder(int par1, int par2, int par3, int par4, int par5, int par6, int par7, int par8, int par9, int par10, int par11) {
+/**  Adds the ids, names, and recipes;
+* int par1 = lunarrockID;  
+* int par2 = lunardustID;
+* int par3 = longfallID;
+* int par4 = longfallEnumID;
+* int par5 = orangeGooID;
+* int par6 = blueGooID;
+* int par7 = whiteGooID;
+* int par8 = gooBallID;
+* int par9 = PortalGunID;
+* int par10 = blueportalID;
+* int par11 = orangeportalID;
+* int par12 = blueportaltopID;
+* int par13 = orangeportaltopID;
+**/
+public static void recipeAdder(int par1, int par2, int par3, int par4, int par5, int par6, int par7, int par8, int par9, int par10, int par11, int par12, int par13) {
 		 lunarrock = new LunarRock(par1, Material.rock);
 		 lunardust= new Lunardust(par2);	
 		 longfallID = par3;
@@ -55,15 +72,19 @@ public static void recipeAdder(int par1, int par2, int par3, int par4, int par5,
 		 whitegoo = new WhiteGoo(par7,Material.sand);		 
 		 gooball = new GooBall(par8);
 		 portalgun = new PortalGun(par9);
-		 blueportal = new BluePortalBlock(par10, Material.circuits);
-		 orangeportal = new OrangePortalBlock(par11, Material.circuits);
+		 blueportal = new BluePortalTopBottom(par10, Material.circuits);
+		 orangeportal = new OrangeTopBottom(par11, Material.circuits);
+		 blueportaltop = new PortalTop(par12, Material.circuits);
+		 orangeportaltop = new OrangeTop(par13, Material.circuits);
+		 
 		 LanguageRegistry.addName(longfall, "Long Fall Boots");
 		 
 		 LanguageRegistry.addName(portalgun, "portal gun");
 		 
+		 LanguageRegistry.addName(orangeportal, "orange portal bottom");
+		 LanguageRegistry.addName(blueportal, "blue portal bottom");
+		 LanguageRegistry.addName(orangeportaltop, "orange portal top");
 		
-		 LanguageRegistry.addName(orangeportal, "orange portal");
-		 LanguageRegistry.addName(blueportal, "blue portal");
 		 
 		 LanguageRegistry.addName(lunardust, "Lunar Dust");
 		 LanguageRegistry.addName(lunarrock, "Lunar Rock");
@@ -71,10 +92,12 @@ public static void recipeAdder(int par1, int par2, int par3, int par4, int par5,
 		 LanguageRegistry.addName(whitegoo, "White goo");
 		 LanguageRegistry.addName(bluegoo, "Blue goo");
 		
-		 GameRegistry.registerBlock(blueportal, "blueportal");
-		 GameRegistry.registerBlock(orangeportal, "orangeportal");
+		 GameRegistry.registerBlock(blueportaltop, "blueportal");
+		 GameRegistry.registerBlock(orangeportaltop, "orangeportal");
+		 GameRegistry.registerBlock(blueportal, "blueportaltopbottom");
+		 GameRegistry.registerBlock(orangeportal, "orangeportaltopbottom");
 		 
-		 
+		 LanguageRegistry.addName(blueportaltop, "blue portal top");
 		 
 		 
 		 

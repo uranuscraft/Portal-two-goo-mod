@@ -20,10 +20,10 @@ public class GooBall extends Item {
 
 	public GooBall(int par1) {
 		super(par1);
-		maxStackSize = 64;
-        setCreativeTab(CreativeTabs.tabMisc);
-        setUnlocalizedName("gooball");
-        setHasSubtypes(true);
+		maxStackSize = 64;//sets the max items per a stack
+        setCreativeTab(CreativeTabs.tabMisc);//sets the item creative tab
+        setUnlocalizedName("gooball");//sets texture name
+        setHasSubtypes(true);//is multiple items
 	
 	}
 
@@ -32,7 +32,7 @@ public class GooBall extends Item {
       private Icon[] icons;
      
       @SideOnly(Side.CLIENT)
-      public void registerIcons(IconRegister par1IconRegister)
+      public void registerIcons(IconRegister par1IconRegister)//Registers textures
       {
              icons = new Icon[3];
             
@@ -44,20 +44,20 @@ public class GooBall extends Item {
      
       public static final String[] names = new String[] {"white", "blue","orange"};
      
-      public String getUnlocalizedName(ItemStack par1ItemStack)
+      public String getUnlocalizedName(ItemStack par1ItemStack)//gets the texture name
    {
        int i = MathHelper.clamp_int(par1ItemStack.getItemDamage(), 0, 15);
        return super.getUnlocalizedName() + "." + names[i];
    }
      
-      public Icon getIconFromDamage(int par1)
+      public Icon getIconFromDamage(int par1)//gets texture from damage
    {
       return icons[par1];
    }
    @SideOnly(Side.CLIENT)
    public void getSubItems(int par1, CreativeTabs par2CreativeTabs, List par3List)
    {
-      for (int x = 0; x < 3; x++)
+      for (int x = 0; x < 3; x++)//sets the amount of metadata items
        {
            par3List.add(new ItemStack(this, 1, x));
        }
@@ -67,7 +67,7 @@ public class GooBall extends Item {
 @Override
  public boolean onItemUse(ItemStack itemStack,EntityPlayer player, World world, int par1, int par2, int par3, int par4, float par5, float par6, float par7 ){
 
-	if(itemStack.getItemDamage() == 0) {
+	if(itemStack.getItemDamage() == 0) {//sees if the item is a white gooball
 		if(player.capabilities.isCreativeMode||player.inventory.consumeInventoryItem(CraftingManger.gooball.itemID)) {
 	
 		
@@ -77,7 +77,7 @@ public class GooBall extends Item {
 		}
 		}
 	
-if(itemStack.getItemDamage() == 1) {
+if(itemStack.getItemDamage() == 1) {//sees if the item is a blue gooball
 	if (player.capabilities.isCreativeMode||player.inventory.consumeInventoryItem(CraftingManger.gooball.itemID)) {
 
 		
@@ -88,7 +88,7 @@ if(itemStack.getItemDamage() == 1) {
 }
 
 
-if(itemStack.getItemDamage() == 2) {
+if(itemStack.getItemDamage() == 2) {//sees if the item is a orange gooball
 	if (player.capabilities.isCreativeMode||player.inventory.consumeInventoryItem(CraftingManger.gooball.itemID)) {
 	
 	GooBase.GooBlock(CraftingManger.Orangegoo.blockID);

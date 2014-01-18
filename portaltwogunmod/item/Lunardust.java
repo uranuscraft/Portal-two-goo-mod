@@ -14,12 +14,12 @@ public class Lunardust extends Item {
 	public Lunardust(int par1) {
 		super(par1);
 		
-        maxStackSize = 64;
-        setCreativeTab(CreativeTabs.tabMisc);
-        setUnlocalizedName("lunardust");
+        maxStackSize = 64;//sets the max items per a stack
+        setCreativeTab(CreativeTabs.tabMisc);//sets the item creative tab
+        setUnlocalizedName("lunardust");//sets texture name
 	}
 	@SideOnly(Side.CLIENT)
-    public void registerIcons(IconRegister par1IconRegister)
+    public void registerIcons(IconRegister par1IconRegister)//Registers textures
     {
         this.itemIcon = par1IconRegister.registerIcon(BaseClass.modid + ":" + (this.getUnlocalizedName().substring(5)));
     }

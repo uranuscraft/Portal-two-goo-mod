@@ -25,14 +25,14 @@ public class LongFallBoots extends ItemArmor implements ISpecialArmor {
 	
 
 	 @Override
-	    public void registerIcons (IconRegister par1IconRegister)
+	    public void registerIcons (IconRegister par1IconRegister)//Registers texture
 	    {
 	        this.itemIcon = par1IconRegister.registerIcon("uranuscraft_portaltwogunmod:armor/" + textureName + "_"
 	                + (this.armorType == 0 ? "helmet" : this.armorType == 1 ? "chestplate" : this.armorType == 2 ? "leggings" : this.armorType == 3 ? "boots" : "helmet"));
 	    }
 
 	    @Override
-	    public String getArmorTexture (ItemStack stack, Entity entity, int slot, int layer)
+	    public String getArmorTexture (ItemStack stack, Entity entity, int slot, int layer)//Registers the model texture
 	    {
 	    	
 	    	return "uranuscraft_portaltwogunmod:textures/armor/longfall_1.png";
@@ -40,11 +40,40 @@ public class LongFallBoots extends ItemArmor implements ISpecialArmor {
 	    	
 	   @Override
 	    public void onArmorTickUpdate(World world,EntityPlayer player,ItemStack itemStack) {
-		  
-	    	
-	    	
-	    	
-	    	
+		
+		   double prey = player.prevPosY;
+			 
+			 double x = player.posX;
+			  double z = player.posZ;
+			   
+			   int y = world.getTopSolidOrLiquidBlock((int)x,(int)z);
+			   double playery = player.posY;
+				double ycheck = prey - playery;
+			  
+				  if(player.motionY < 0 && player.motionY < -2 && ycheck > 0) {
+					  int d = (int) (playery - y);
+						
+					  double g = 9.8; //the meters per a second
+					  double firstequation = g * 2; 
+					  double secondequation = firstequation * d;
+					  double v = Math.sqrt(secondequation);
+					  double answer = v * -1; //the calculation for the velocity of the given
+					  int o = 0;
+					  do {
+						  player.motionY = o;
+						  o++;
+						  
+					 
+					  } while(o < answer + 1);
+					  
+					  
+					  
+							
+					  		
+			  
+				  
+			  } 
+	   	
 	    }
 	   
 	   public String textureName = "longfall";
@@ -80,4 +109,13 @@ public class LongFallBoots extends ItemArmor implements ISpecialArmor {
 		// TODO Auto-generated method stub
 		
 	}
+
+
+@Override
+public void onUpdate(ItemStack stack,World world,Entity entity, int par4, boolean par5) {
+	 EntityPlayer player = (EntityPlayer) entity;
+	   
+}
+
+
 }

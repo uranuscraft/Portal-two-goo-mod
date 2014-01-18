@@ -3,8 +3,9 @@ import java.util.EnumSet;
 import java.util.Iterator;
 
 import org.lwjgl.input.Keyboard;
-import net.minecraft.item.ItemStack;
 
+import net.minecraft.item.ItemStack;
+import portaltwogunmod.crafting.CraftingManger;
 import portaltwogunmod.entity.BluePortal;
 import portaltwogunmod.entity.OrangePortal;
 import portaltwogunmod.item.PortalGun;
@@ -37,7 +38,7 @@ public class KeyBind extends KeyHandler
     	
     }
     
-    if(kb.equals(1)) {
+    if(kb.equals(-2)) {
     	left = true;
     	
     }
@@ -65,14 +66,15 @@ public static boolean left = false;
 
     if(KeyBind.keyPressed)
     {
-    if(left = true) {
+    if(left = true && par1ItemStack.itemID == CraftingManger.portalgun.itemID) {
     	PortalGun.spawnOrange(par1ItemStack, par2World, player);
     
     	PortalGun.orangeportal = false;
     	left = false;
     }
-    if(r= true) {
+    if(r = true && par1ItemStack.itemID == CraftingManger.portalgun.itemID) {
     	
+    	PortalGun.Portalkill(par2World);
     	PortalGun.orangeportal = false;
     	PortalGun.blueportal = false;
     	blue.setDeadBlue();

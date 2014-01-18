@@ -15,22 +15,22 @@ public class LunarRock extends Block {
 
 	public LunarRock(int par1, Material par2Material) {
 		super(par1, par2Material);
-		setHardness(4.0F); 
-        setStepSound(Block.soundStoneFootstep);
-        setUnlocalizedName("lunarrock");
-        setCreativeTab(CreativeTabs.tabBlock);
+		setHardness(4.0F); //sets the amount of hits before it breaks
+        setStepSound(Block.soundStoneFootstep);//sets the sound played when walked on 
+        setUnlocalizedName("lunarrock");//sets the texture name 
+        setCreativeTab(CreativeTabs.tabBlock);//sets the creative tab to block
 	}
 	@SideOnly(Side.CLIENT)
-    public void registerIcons(IconRegister par1IconRegister)
+    public void registerIcons(IconRegister par1IconRegister)//Registers the textures
     {
         this.blockIcon = par1IconRegister.registerIcon(BaseClass.modid + ":" + (this.getUnlocalizedName().substring(5)));
     }
-	public int idDropped(int par1, Random random, int par2) {
+	public int idDropped(int par1, Random random, int par2) {//sets the id of the item dropped
         return CraftingManger.lunardust.itemID;
         
         
 }
-	public int quantityDropped(Random par1Random)
+	public int quantityDropped(Random par1Random)//sets the amount of items dropped
     {
         return 4;
     }

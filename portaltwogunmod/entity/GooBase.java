@@ -33,18 +33,18 @@ public class GooBase extends EntityThrowable {
 		  
 		
 		   if(blockID == CraftingManger.bluegoo.blockID) {
-			   worldObj.setBlock((int)this.posX, (int)this.posY, (int)this.posZ, CraftingManger.bluegoo.blockID);
-			   this.setDead();
+			   worldObj.setBlock((int)this.posX, (int)this.posY, (int)this.posZ, CraftingManger.bluegoo.blockID);//sets the block at x,y,z to blue goo
+			   this.setDead();//kills this entity
 		   }
 		   
 		   if(blockID == CraftingManger.Orangegoo.blockID) {
-			   worldObj.setBlock((int)this.posX, (int)this.posY, (int)this.posZ, CraftingManger.Orangegoo.blockID);
-			   this.setDead();
+			   worldObj.setBlock((int)this.posX, (int)this.posY, (int)this.posZ, CraftingManger.Orangegoo.blockID);//sets the block at x,y,z to orange goo
+			   this.setDead();//kills this entity
 		   }
 		   
 		   if(blockID == CraftingManger.whitegoo.blockID) {
-			   worldObj.setBlock((int)this.posX, (int)this.posY, (int)this.posZ, CraftingManger.whitegoo.blockID);
-			   this.setDead();
+			   worldObj.setBlock((int)this.posX, (int)this.posY, (int)this.posZ, CraftingManger.whitegoo.blockID); //sets the block at x,y,z to white goo 
+			   this.setDead();//kills this entity
 		   }
 		   
 		   
@@ -53,7 +53,10 @@ public class GooBase extends EntityThrowable {
 	}
 	   
 	   public static int blockID;
-	   
+	   /**sets the block id to change the impact block to
+	    * 
+	    * @param par1
+	    */
 	   public static void GooBlock(int par1) {
 		   
 		   blockID = par1;
